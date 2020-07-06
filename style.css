@@ -1,0 +1,39 @@
+#baloesInteiros{
+    font-size: 40px;
+}
+
+.btn-inteiro-grande{
+    float: left;
+    width: auto;
+    height: 500px;
+    background: #FFF;
+    border: solid 1px #a2a2a2;
+    margin-right: 5px;
+}
+
+#baloesEstourados{
+    font-size: 40px;
+}
+
+#cronometro{
+    color: red;
+    font-size: 30px;
+}
+
+.table-cronometro{
+    width: 140px;
+    height: 132px;
+}
+
+.fundo-cronometro{
+    background: url('imagens/cronometro.png');
+    text-align: center;
+}
+
+#cenario{
+    float: left;
+    width: 600px;
+    height: 500px;
+    background: url('imagens/cenario.png');
+    background-position: bottom;
+}
