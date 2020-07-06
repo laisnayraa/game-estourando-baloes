@@ -21,18 +21,14 @@ function iniciaJogo(){
     document.getElementById('cronometro').innerHTML = tempoSegundos;
 
     // Quantidade de balões inteiros
-    var quantBaloesInteiros = 40;
+    var quantBaloesInteiros = 10;
     criaBaloes(quantBaloesInteiros);
 
     // Imprimir quantidade de balões inteiros
     document.getElementById('baloesInteiros').innerHTML = quantBaloesInteiros;
 
-    // Quantidade de balões estourados
-
-
     // Imprimir quantidade de balões estourados
     document.getElementById('baloesEstourados').innerHTML = 0;
-
 }
 
 function contagemTempo(segundos){
@@ -50,6 +46,7 @@ function contagemTempo(segundos){
 
 function gameOver(){
 
+    removeEventosBaloes();
     alert('Fim de jogo, você perdeu!');
 
 }
@@ -71,6 +68,8 @@ function criaBaloes(quantBaloesInteiros){
 function estourar(e){
 
     var idBalao = e.id;
+
+    document.getElementById(idBalao).setAttribute("onclick", "")
     document.getElementById(idBalao).src = 'imagens/balao_azul_pequeno_estourado.png';
     pontuacao(-1);
 
@@ -88,4 +87,24 @@ function pontuacao(acao){
 
     document.getElementById('baloesInteiros').innerHTML = baloesInteiros;
     document.getElementById('baloesEstourados').innerHTML = baloesEstourados;
+
+    situacaoJogo(baloesInteiros);
+}
+
+function situacaoJogo(inteiros){
+    if (inteiros == 0) {
+        alert('Você venceu! Todos os balões foram estourados.');
+        clearTimeout(timerId);
+    }
+}
+
+function removeEventosBaloes() {
+    var i = 1; //contador para recuperar balões por id
+    
+    //percorre os elementos de acordo com o id e só irá sair do laço quando não houver correspondência com elemento
+    while(document.getElementById('b'+i)) {
+        //retira o evento onclick do elemnto
+        document.getElementById('b'+i).onclick = '';
+        i++; //faz a iteração da variávei i
+    }
 }
