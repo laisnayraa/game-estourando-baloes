@@ -1,3 +1,5 @@
+var timerId = null; //Variável que armazena a chamada da função contagemTempo (timeout)
+
 function iniciaJogo(){
     var url = window.location.search;
     var nivelJogo = url.replace("?", "")
@@ -12,6 +14,8 @@ function iniciaJogo(){
     if (nivelJogo == 3){ // Nível 3 - Difícil = 30s
         tempoSegundos = 30;
     }
+
+    contagemTempo(tempoSegundos + 1);
 
     // Inserindo segundos no span
     document.getElementById('cronometro').innerHTML = tempoSegundos;
@@ -28,6 +32,22 @@ function iniciaJogo(){
 
     // Imprimir quantidade de balões estourados
     document.getElementById('baloesEstourados').innerHTML = 0;
+
+}
+
+function contagemTempo(segundos){
+    segundos = segundos - 1;
+    if(segundos == -1){
+        clearTimeout(timerId); //Pára a execução da função do setTimeOut
+        gameOver();
+        return false;
+    }    
+    document.getElementById('cronometro').innerHTML = segundos;
+    timerId = setTimeout("contagemTempo("+segundos+")", 1000)
+}
+
+function gameOver(){
+    alert('Fim de jogo, você perdeu!');
 }
 
 function criaBaloes(quantBaloesInteiros){
