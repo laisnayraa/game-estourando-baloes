@@ -21,7 +21,7 @@ function iniciaJogo(){
     document.getElementById('cronometro').innerHTML = tempoSegundos;
 
     // Quantidade de balões inteiros
-    var quantBaloesInteiros = 30;
+    var quantBaloesInteiros = 40;
     criaBaloes(quantBaloesInteiros);
 
     // Imprimir quantidade de balões inteiros
@@ -36,6 +36,7 @@ function iniciaJogo(){
 }
 
 function contagemTempo(segundos){
+
     segundos = segundos - 1;
     if(segundos == -1){
         clearTimeout(timerId); //Pára a execução da função do setTimeOut
@@ -44,18 +45,47 @@ function contagemTempo(segundos){
     }    
     document.getElementById('cronometro').innerHTML = segundos;
     timerId = setTimeout("contagemTempo("+segundos+")", 1000)
+
 }
 
 function gameOver(){
+
     alert('Fim de jogo, você perdeu!');
+
 }
 
 function criaBaloes(quantBaloesInteiros){
+
     for(var i = 1; i<=quantBaloesInteiros; i++){
         var balao = document.createElement("img");
         balao.src = 'imagens/balao_azul_pequeno.png';
         balao.style.margin = '10px';
+        balao.id = 'b'+i;
+        balao.onclick = function() {estourar(this); };
 
         document.getElementById('cenario').appendChild(balao);
     }
+
+}
+
+function estourar(e){
+
+    var idBalao = e.id;
+    document.getElementById(idBalao).src = 'imagens/balao_azul_pequeno_estourado.png';
+    pontuacao(-1);
+
+}
+
+function pontuacao(acao){
+    var baloesInteiros = document.getElementById('baloesInteiros').innerHTML;
+    var baloesEstourados = document.getElementById('baloesEstourados').innerHTML;
+
+    baloesInteiros = parseInt(baloesInteiros);
+    baloesEstourados = parseInt(baloesEstourados);
+
+    baloesInteiros = baloesInteiros + acao;
+    baloesEstourados = baloesEstourados - acao;
+
+    document.getElementById('baloesInteiros').innerHTML = baloesInteiros;
+    document.getElementById('baloesEstourados').innerHTML = baloesEstourados;
 }
