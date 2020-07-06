@@ -6,7 +6,7 @@ function iniciaJogo(){
     var tempoSegundos = 0;
 
     if (nivelJogo == 1){ // Nível 1 - Fácil = 120s
-        tempoSegundos = 120;
+        tempoSegundos = 90;
     }
     if (nivelJogo == 2){ // Nível 2 - Normal = 60s
         tempoSegundos = 60;
@@ -21,7 +21,7 @@ function iniciaJogo(){
     document.getElementById('cronometro').innerHTML = tempoSegundos;
 
     // Quantidade de balões inteiros
-    var quantBaloesInteiros = 10;
+    var quantBaloesInteiros = 80;
     criaBaloes(quantBaloesInteiros);
 
     // Imprimir quantidade de balões inteiros
@@ -47,8 +47,8 @@ function contagemTempo(segundos){
 function gameOver(){
 
     removeEventosBaloes();
-    alert('Fim de jogo, você perdeu!');
-
+    alert('Fim de jogo! Você não conseguiu estourar todos os balões.');
+    retornainicio();
 }
 
 function criaBaloes(quantBaloesInteiros){
@@ -107,4 +107,8 @@ function removeEventosBaloes() {
         document.getElementById('b'+i).onclick = '';
         i++; //faz a iteração da variávei i
     }
+}
+
+function retornainicio(){
+    window.location.href = 'index.html';
 }
